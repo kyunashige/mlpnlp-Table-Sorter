@@ -1,23 +1,22 @@
 // ==UserScript==
 // @name         mlpnlp Table Sorter
 // @namespace    https://github.com/kyunashige/mlpnlp-table-sorter
-// @version      0.1
-// @description  mlpnlp の正誤表をページ順にソートする
+// @version      0.2
+// @description  mlpnlp の正誤表をページ番号順にソートする
 // @author       kyuna
 // @match        https://github.com/mlpnlp/mlpnlp
-// @license     MIT
+// @license      MIT
 // @supportURL   https://github.com/kyunashige/mlpnlp-table-sorter/issues
 // @grant        none
 // ==/UserScript==
 
-(function () {
+(() => {
   "use strict";
   /**
    * fetch correct/incorrect table
    */
   const $ = document.querySelector.bind(document);
   var coricTable = $("#readme > div.Box-body.p-5 > article > table > tbody");
-  // console.log(coricTable);
   // console.log(toString.call(coricTable));
   /**
    * sort by PageNo
@@ -26,7 +25,7 @@
   function getPageNo(row) {
     return parseInt(row.cells[2].innerText.match(/\d+/g)[0], 10);
   }
-  rows.sort(function (a, b) {
+  rows.sort((a, b) => {
     return getPageNo(a) - getPageNo(b);
   });
   /**
@@ -39,5 +38,5 @@
   /**
    * replace table
    */
-  $("#readme > div.Box-body.p-5 > article > table").append(table);
+  $("#readme > div.Box-body.p-5 > article > table").appendChild(table);
 })();
